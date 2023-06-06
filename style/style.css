@@ -162,4 +162,10 @@ li{
         justify-content: center;
         align-items: center;
     }
+    #sort{
+      width:100%;
+    }
+    #add{
+      width:100%;
+    }
 }

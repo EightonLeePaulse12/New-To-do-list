@@ -6,19 +6,26 @@ const list = document.querySelector(".listt");
 let empty = [];
 let remove = [];
 let checkboxes = [];
-let strike = [];
+let strike = [];  
+
+empty = JSON.parse(localStorage.getItem('data')) != undefined ? JSON.parse(localStorage.getItem('data')) : [];
+console.log(JSON.parse(localStorage.getItem("data")))
 
 addButton.addEventListener("click", (e) => {
   e.preventDefault();
   if (input.value) {
-    empty.push(input.value);
+    empty.push(input.value.charAt(0).toUpperCase() + input.value.slice(1));
     input.value = "";
+    console.log(empty);
+    
   } else {
     alert("Please enter something!");
   }
-
+  
   empty = [...new Set(empty)];
-
+  
+  
+  
   yes();
 });
 
@@ -51,29 +58,35 @@ sortButton.addEventListener("click", () => {
   yes();
 });
 
-function uppercase() {
-  empty += "";
-  let array = empty.split("", 2);
-  let character = array[0];
-  console.log(character);
-  let basic = character.charAt(0).toUpperCase();
-  empty += basic;
-  console.log(basic);
-}
+// function uppercase() {
+//   empty += "";
+//   let array = empty.split("", 2);
+//   let character = array[0];
+//   console.log(character);
+//   let basic =
+//   empty += basic;
+//   console.log(basic);
+// }
 
 function yes() {
   list.innerHTML = "";
   empty.forEach((data) => {
-   
     list.innerHTML += `
         <ul id="list">
         <li> <input type="checkbox" name="checkbox" id="checkItem"><span>${data}</span> <button id="exit">X</button></li>
         </ul>
-        `;
-        // uppercase();
+        `
   });
+
+  localStorage.setItem('data',  JSON.stringify(empty))
+
   strike = [...document.querySelectorAll("span")];
   checkboxes = [...document.querySelectorAll("#checkItem")];
+  strikethrough();
+  removeFunction()
+}
+
+let removeFunction = ()=>{
   remove = [...document.querySelectorAll("#exit")];
   remove.forEach((item) => {
     item.addEventListener("click", (e) => {
@@ -81,8 +94,11 @@ function yes() {
       console.log(parseInt(remove.indexOf(e.target)));
       console.log(empty[parseInt(remove.indexOf(e.target))]);
       empty.splice(parseInt(remove.indexOf(e.target)), 1);
+      // localStorage.setItem('moreData',(empty.splice(parseInt(remove.indexOf(e.target)),1)))
       yes();
     });
   });
-  strikethrough();
 }
+yes();
+
+ 
