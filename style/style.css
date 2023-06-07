@@ -155,6 +155,22 @@ li{
 
 }
 
+.whyme{
+    /* width:2rem;
+    height:1rem; */
+    /* font-size: 1rem; */
+    background-color: #ff5500;
+    border:2px solid black;
+    /* margin-top:1rem; */
+    /* width:5px; */
+    font-size:10px;
+    /* height:1rem; */
+    width:2rem;
+    /* margin-left:12rem; */
+    float: right;
+
+}
+
 @media (max-width:403px){
     #functions{
         display:flex;

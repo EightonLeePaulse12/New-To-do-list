@@ -3,13 +3,16 @@ const sortButton = document.querySelector("#sort");
 const input = document.querySelector("#toDoItem");
 const list = document.querySelector(".listt");
 
-let empty = [];
 let remove = [];
 let checkboxes = [];
-let strike = [];  
+// let strike = [];
+let span = [];
+let edit = [];
 
-empty = JSON.parse(localStorage.getItem('data')) != undefined ? JSON.parse(localStorage.getItem('data')) : [];
-console.log(JSON.parse(localStorage.getItem("data")))
+let empty = JSON.parse(localStorage.getItem("data"))
+  ? JSON.parse(localStorage.getItem("data"))
+  : [];
+// console.log(JSON.parse(localStorage.getItem("data")))
 
 addButton.addEventListener("click", (e) => {
   e.preventDefault();
@@ -17,29 +20,32 @@ addButton.addEventListener("click", (e) => {
     empty.push(input.value.charAt(0).toUpperCase() + input.value.slice(1));
     input.value = "";
     console.log(empty);
-    
   } else {
     alert("Please enter something!");
   }
-  
+
   empty = [...new Set(empty)];
-  
-  
-  
+
   yes();
 });
 
 function strikethrough() {
+  checkboxes = [...document.querySelectorAll("#checkItem")];
+  span = [...document.querySelectorAll("span")];
+
+  console.log(checkboxes);
   checkboxes.forEach((item) => {
-    item.addEventListener("click", () => {
-      if (item.checked == true) {
-        strike.forEach((item) => {
-          item.style.textDecoration = "line-through";
-        });
+    item.addEventListener("click", (event) => {
+      console.log(event.target);
+      console.log(checkboxes.indexOf(event.target));
+      console.log(empty[checkboxes.indexOf(event.target)]);
+      let box = span[checkboxes.indexOf(event.target)];
+      console.log(box);
+      console.log(typeof box);
+      if (event.target.checked === true) {
+        box.style.textDecoration = "line-through";
       } else {
-        strike.forEach((item) => {
-          item.style.textDecoration = "none";
-        });
+        box.style.textDecoration = "none";
       }
     });
   });
@@ -58,35 +64,52 @@ sortButton.addEventListener("click", () => {
   yes();
 });
 
-// function uppercase() {
-//   empty += "";
-//   let array = empty.split("", 2);
-//   let character = array[0];
-//   console.log(character);
-//   let basic =
-//   empty += basic;
-//   console.log(basic);
-// }
-
 function yes() {
   list.innerHTML = "";
   empty.forEach((data) => {
     list.innerHTML += `
         <ul id="list">
-        <li> <input type="checkbox" name="checkbox" id="checkItem"><span>${data}</span> <button id="exit">X</button></li>
+        <li> <input type="checkbox" name="checkbox" id="checkItem"><span>${data}</span><button class="whyme">Edit</button> <button id="exit">X</button></li>
         </ul>
-        `
+        `;
   });
 
-  localStorage.setItem('data',  JSON.stringify(empty))
+  localStorage.setItem("data", JSON.stringify(empty));
 
   strike = [...document.querySelectorAll("span")];
   checkboxes = [...document.querySelectorAll("#checkItem")];
   strikethrough();
-  removeFunction()
+  removeFunction();
+  editMe();
 }
 
-let removeFunction = ()=>{
+let editButton = document.querySelectorAll(".whyme");
+
+function editMe() {
+  edit = [...document.querySelectorAll(".whyme")];
+
+  console.log(edit);
+  span = [...document.querySelectorAll("span")];
+
+  edit.forEach((item) => {
+    item.addEventListener("click", (e) => {
+      console.log(item);
+      let question = prompt("Edit...");
+      let box = span[edit.indexOf(e.target)];
+      box.textContent = question
+      console.log(box);
+      console.log(question);
+    });
+  });
+
+  // editButton.addEventListener("click", (e) => {
+  //   console.log(edit);
+  //   let question = prompt("Edit...");
+  //   console.log(question);
+  //   console.log(empty[checkboxes.indexOf(e.target)]);
+}
+
+let removeFunction = () => {
   remove = [...document.querySelectorAll("#exit")];
   remove.forEach((item) => {
     item.addEventListener("click", (e) => {
@@ -94,11 +117,8 @@ let removeFunction = ()=>{
       console.log(parseInt(remove.indexOf(e.target)));
       console.log(empty[parseInt(remove.indexOf(e.target))]);
       empty.splice(parseInt(remove.indexOf(e.target)), 1);
-      // localStorage.setItem('moreData',(empty.splice(parseInt(remove.indexOf(e.target)),1)))
       yes();
     });
   });
-}
+};
 yes();
-
- 
