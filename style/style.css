@@ -171,6 +171,10 @@ li{
 
 }
 
+#exit{
+  margin-right:.4rem;
+}
+
 @media (max-width:403px){
     #functions{
         display:flex;
