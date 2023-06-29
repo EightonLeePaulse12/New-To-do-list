@@ -20,6 +20,10 @@ body{
     align-items: center;
 }
 
+#tdHeading{
+  position:relative;
+}
+
 #container{
     border: 20px solid #F08A5D;
     background-color: #F08A5D;
@@ -111,6 +115,12 @@ li{
     /* margin-left:12rem; */
     float: right;
 
+}
+
+#piccie{
+  height: 3rem;
+  position:absolute;
+  z-index:1;
 }
 
 #exit{
