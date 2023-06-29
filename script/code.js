@@ -52,6 +52,7 @@ sortButton.addEventListener("click", () => {
     }
     return 0;
   });
+  localStorage.setItem('data',JSON.stringify(empty))
   yes();
 });
 
