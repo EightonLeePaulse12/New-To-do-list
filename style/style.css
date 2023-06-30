@@ -12,6 +12,8 @@ body{
     font-family: "Poppins", sans-serif;
 }
 
+
+
 #mine{
     width: 100vw;
     height:100vh;
@@ -25,8 +27,8 @@ body{
 }
 
 #container{
-    border: 20px solid #F08A5D;
-    background-color: #F08A5D;
+    border: 50px solid rgb(225,83,55);
+    background-color: rgb(225,83,55);
     width: fit-content;
 }
 
@@ -110,6 +112,7 @@ li{
     /* margin-top:1rem; */
     /* width:5px; */
     font-size:10px;
+    margin-right:3px;
     /* height:1rem; */
     width:2rem;
     /* margin-left:12rem; */

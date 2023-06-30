@@ -52,7 +52,7 @@ sortButton.addEventListener("click", () => {
     }
     return 0;
   });
-  localStorage.setItem('data',JSON.stringify(empty))
+  localStorage.setItem("data", JSON.stringify(empty));
   yes();
 });
 
@@ -87,7 +87,7 @@ function editMe() {
       let question = prompt("Edit...");
       let box = span[edit.indexOf(e.target)];
       let i = edit.indexOf(e.target);
-      empty[i] = question;
+      empty[i] = question.charAt(0).toUpperCase() + question.slice(1);
       box.textContent = question;
       localStorage.setItem("data", JSON.stringify(empty));
     });
